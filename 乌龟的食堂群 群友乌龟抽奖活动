@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>乌龟抽奖</title>
+<style>
+body{
+text-align:center;
+font-family:Arial;
+margin-top:80px;
+}
+button{
+width:180px;
+height:60px;
+font-size:22px;
+}
+#result{
+margin-top:30px;
+font-size:35px;
+color:red;
+font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<h1>乌龟抽奖活动</h1>
+
+<input id="qq" placeholder="请输入QQ号" style="height:40px;font-size:20px;">
+<br><br>
+
+<button onclick="draw()">开始抽奖</button>
+
+<div id="result"></div>
+
+<script>
+function draw(){
+
+let qq=document.getElementById("qq").value.trim();
+
+if(!qq){
+alert("请输入QQ号");
+return;
+}
+
+if(localStorage.getItem("draw_"+qq)){
+document.getElementById("result").innerHTML=
+"你已经抽过奖：<br>"+localStorage.getItem("draw_"+qq);
+return;
+}
+
+let r=Math.random()*100;
+let prize="";
+
+if(r<47){
+prize="巴西龟";
+}else if(r<94){
+prize="草龟";
+}else if(r<96){
+prize="黄缘龟";
+}else if(r<98){
+prize="地图龟";
+}else{
+prize="亚巨龟";
+}
+
+localStorage.setItem("draw_"+qq,prize);
+
+document.getElementById("result").innerHTML=
+"恭喜抽中："+prize;
+}
+</script>
+
+</body>
+</html>
